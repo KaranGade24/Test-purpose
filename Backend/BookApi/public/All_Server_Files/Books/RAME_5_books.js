@@ -5,7 +5,15 @@ exports.read5book = async (req, res) => {
   try {
     // Fetch 5 books from the database
     const bookData = await Book.find().limit(5);
-
+   var msg = "";
+    if(!(bookData[0])){
+       msg = "Books are not available";
+    }
+    else{
+      msg = "Recent Books";
+    }
+    console.log(msg,bookData);
+    
     const RAME_book_style = "RAME_book_style.css";
 
     // Generate HTML for books dynamically
@@ -134,7 +142,7 @@ exports.read5book = async (req, res) => {
 
           <section id="recent-books" class="section">
             <div class="container">
-              <h2>Recent Books</h2>
+              <h2>${msg}</h2>
               ${booksHtml}
             </div>
           </section>

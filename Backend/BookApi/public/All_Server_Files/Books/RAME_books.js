@@ -92,7 +92,7 @@ exports.readBooks = async (req, res) => {
     <div class="container">
       <h1>Oops! No Books Found</h1>
       <p>It looks like the page you are looking for does not exist or has no books. Please check the page number and try again.</p>
-      <a href="/books/1" class="btn">Go Back to Books List</a>
+      <a href="/books/" class="btn">Go Back to Books List</a>
     </div>
   </body>
 </html>`);

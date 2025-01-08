@@ -1,7 +1,7 @@
 
 
 exports.admin = (req,res)=>{
-const api = "https://didactic-couscous-4x9wv746j6j2j4pj-8080.app.github.dev/"
+const api = "https://test-purpose-yesu.onrender.com/"
 
 const html = `<!DOCTYPE html>
 <html lang="en">
