@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+
+
+exports.admin = (req,res)=>{
+const api = "https://didactic-couscous-4x9wv746j6j2j4pj-8080.app.github.dev/"
+
+const html = `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -59,7 +64,7 @@
     <h2>Upload Form</h2>
     <form
       id="uploadForm"
-      action="https://didactic-couscous-4x9wv746j6j2j4pj-8080.app.github.dev/add"
+      action=${api}add
       method="POST"
       enctype="multipart/form-data"
     >
@@ -115,7 +120,7 @@
 
         try {
           const response = await fetch(
-            "https://didactic-couscous-4x9wv746j6j2j4pj-8080.app.github.dev/add", // Adjust to your API URL
+            ${api}add, // Adjust to your API URL
             {
               method: "POST",
               body: formData,
@@ -137,4 +142,8 @@
       
     </script>
   </body>
-</html>
+</html>`
+
+res.send(html);
+
+}

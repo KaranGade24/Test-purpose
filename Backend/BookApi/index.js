@@ -13,6 +13,7 @@ const Book = model.book;
 const book_5_read = require("./public/All_Server_Files/Books/RAME_5_books");
 const bookread = require("./public/All_Server_Files/Books/RAME_books");
 const bookClick = require("./public/All_Server_Files/Books/Book_click")
+const admin = require("./public/All_Server_Files/Books/admin")
 
 // Initialize the app
 const app = express();
@@ -98,6 +99,7 @@ app.post("/add", upload.array("files", 2), async (req, res) => {
 app.get("/books/:pages", bookread.readBooks);
 app.get("/books", book_5_read.read5book);
 app.get("/book/:id", bookClick.renderBookPage);
+app.get("/admin", admin.admin);
 
 // ROUTES FOR POSTMAN
 app.get("/bookss", bookController.read);
