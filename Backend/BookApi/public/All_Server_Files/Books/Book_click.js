@@ -64,11 +64,13 @@ console.log(eBookPath);
           .nav-links {
             list-style: none;
             display: flex;
+            flex-wrap:wrap;
             padding: 0;
             margin: 0;
           }
           .nav-links li {
             margin-left: 15px;
+            padding:4px 0px;
           }
           .nav-links a {
             color: #fff;
