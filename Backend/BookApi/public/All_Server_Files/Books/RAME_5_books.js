@@ -6,17 +6,20 @@ exports.read5book = async (req, res) => {
     // Fetch 5 books from the database
     const bookData = await Book.find().limit(5);
     var msg = "",
-      viewMore = "";
+      viewMore = "",
+      viewAllBooksPath = "";
 
     if (!bookData[0]) {
       msg = "Books are not available";
       viewMore = "";
+      viewAllBooksPath = "/books";
     } else {
       msg = "Recent Books";
       viewMore =
         '<a href = "/books/1"  <div class= "view-more"><button>View More</button></div></a>';
+      viewAllBooksPath = "/books/1";
     }
-    console.log(viewMore);
+    // console.log(viewMore);
 
     // console.log(msg,bookData);
 
@@ -226,7 +229,7 @@ ${viewMore}
                 </div>
                 <div class="author-card">
                   <h3>View all Books</h3>
-                  <a href="/books/1"> <p>Browse the full catalog of our published books.</p></a>
+                  <a href="${viewAllBooksPath}"> <p>Browse the full catalog of our published books.</p></a>
 
                 </div>
               </div>

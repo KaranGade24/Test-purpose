@@ -167,7 +167,8 @@
           );
 
           if (response.ok) {
-            result1 = await response.json(); // Parse the JSON response
+            result1 = await response.json();
+            // Parse the JSON response
             console.log(result1);
             displayBooks(result1); // Function to display books on the frontend
           } else {
@@ -182,12 +183,16 @@
 
       // Function to display the books
       function displayBooks(books) {
+        const api = "https://test-purpose-yesu.onrender.com";
         const bookList = document.getElementById("bookList");
         bookList.innerHTML = ""; // Clear any existing books
         books.forEach((book) => {
           const bookItem = document.createElement("div");
           bookItem.classList.add("book-item");
           bookItem.innerHTML = `
+           <p><strong>Book Cover:</strong> <img src="${api}/uploads${
+            book.files[0].filePath.split("/uploads")[1]
+          }" alt="Book Cover" /></p>
             <p><strong>Name:</strong> ${book.name}</p>
             <p><strong>ISBN:</strong> ${book.isbn}</p>
             <p><strong>Genre:</strong> ${book.genre}</p>
@@ -196,8 +201,15 @@
             <p><strong>eBook Price:</strong> ${book.ebookPrice}</p>
             <p><strong>Description:</strong> ${book.description}</p>
             <p><strong>Abstraction:</strong> ${book.Abstraction}</p>
-            
+            <p><strong>eBook:</strong> <a href="${api}/uploads${
+            book.files[0].filePath.split("/uploads")[1]
+          }" target="_blank" class="file-link">Download eBook</a></p>
           `;
+          // console.log(book.files[0].filePath.split("/uploads")[1]);
+          // console.log(
+          //   api + "/uploads" + book.files[1].filePath.split("/uploads")[1]
+          // );
+
           bookList.appendChild(bookItem);
         });
       }
@@ -222,23 +234,23 @@
             alert(result.message); // Show success message
 
             // Display book details in the "Uploaded Books" section
-            const bookList = document.getElementById("bookList");
-            const bookItem = document.createElement("div");
-            bookItem.classList.add("book-item");
+            //   const bookList = document.getElementById("bookList");
+            //   const bookItem = document.createElement("div");
+            //   bookItem.classList.add("book-item");
 
-            bookItem.innerHTML = `
-              <p><strong>Name:</strong> ${result.book.name}</p>
-              <p><strong>ISBN:</strong> ${result.book.isbn}</p>
-              <p><strong>Genre:</strong> ${result.book.genre}</p>
-              <p><strong>Year:</strong> ${result.book.year}</p>
-              <p><strong>Print Price:</strong> ${result.book.printPrice}</p>
-              <p><strong>eBook Price:</strong> ${result.book.ebookPrice}</p>
-              <p><strong>Description:</strong> ${result.book.description}</p>
-              <p><strong>Abstraction:</strong> ${result.book.Abstraction}</p>
-              <p><strong>Book Cover:</strong> <img src="${result.files[0].filePath}" alt="Book Cover" /></p>
-              <p><strong>eBook:</strong> <a href="${result.files[1].filePath}" target="_blank" class="file-link">Download eBook</a></p>
-            `;
-            bookList.appendChild(bookItem);
+            //   bookItem.innerHTML = `
+            //     <p><strong>Name:</strong> ${result.book.name}</p>
+            //     <p><strong>ISBN:</strong> ${result.book.isbn}</p>
+            //     <p><strong>Genre:</strong> ${result.book.genre}</p>
+            //     <p><strong>Year:</strong> ${result.book.year}</p>
+            //     <p><strong>Print Price:</strong> ${result.book.printPrice}</p>
+            //     <p><strong>eBook Price:</strong> ${result.book.ebookPrice}</p>
+            //     <p><strong>Description:</strong> ${result.book.description}</p>
+            //     <p><strong>Abstraction:</strong> ${result.book.Abstraction}</p>
+            //     <p><strong>Book Cover:</strong> <img src="${result.files[0].filePath}" alt="Book Cover" /></p>
+            //     <p><strong>eBook:</strong> <a href="${result.files[1].filePath}" target="_blank" class="file-link">Download eBook</a></p>
+            //   `;
+            //   bookList.appendChild(bookItem);
           }
         } catch (error) {
           console.error("Error uploading files:", error);
