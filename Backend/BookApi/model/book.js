@@ -9,6 +9,9 @@ const Bookschema = new Schema({
   Abstraction:{type:String,require:true},
   printPrice:{type:Number,require:true},
   ebookPrice:{type:Number,require:true},
+  coEditors:{type:String,require:true},
+  editor:{type:String,require:true},
+  editorEmail:{type:String,require:true},
   files: [
     {
       originalName: { type: String, required: true },

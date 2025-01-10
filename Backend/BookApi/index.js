@@ -12,8 +12,8 @@ const Book = model.book;
 //
 const book_5_read = require("./public/All_Server_Files/Books/RAME_5_books");
 const bookread = require("./public/All_Server_Files/Books/RAME_books");
-const bookClick = require("./public/All_Server_Files/Books/Book_click")
-const admin = require("./public/All_Server_Files/Books/admin")
+const bookClick = require("./public/All_Server_Files/Books/Book_click");
+const admin = require("./public/All_Server_Files/Books/admin");
 
 // Initialize the app
 const app = express();
@@ -58,31 +58,23 @@ const upload = multer({ storage: storage });
 // Routes
 app.post("/add", upload.array("files", 2), async (req, res) => {
   try {
-    // Log form data and uploaded files
     console.log("Form data:", req.body);
     console.log("Uploaded files:", req.files);
 
-    // Process the uploaded files
     const uploadedFiles = req.files.map((file) => ({
       originalName: file.originalname,
       filePath: file.path,
       fileSize: file.size,
     }));
 
-    // Create book data object
     const bookData = {
-      ...req.body, // Include form fields (e.g., name, isbn, genre, etc.)
-      files: uploadedFiles, // Include uploaded files metadata
+      ...req.body,
+      files: uploadedFiles,
     };
 
-    // Log the final book data
-    console.log("Book data to be saved:", bookData);
-
-    // Create new book and save it to MongoDB
     const book = new Book(bookData);
     await book.save();
 
-    // Respond with success message and book data
     res.json({
       message: "Book and files uploaded successfully!",
       book: bookData,
@@ -99,15 +91,15 @@ app.post("/add", upload.array("files", 2), async (req, res) => {
 app.get("/books/:pages", bookread.readBooks);
 app.get("/books", book_5_read.read5book);
 app.get("/book/:id", bookClick.renderBookPage);
-app.get("/admin", admin.admin);
+// app.get("/admin", admin.admin);
 
 // ROUTES FOR POSTMAN
+
 app.get("/bookss", bookController.read);
 app.post("/book", bookController.create);
 app.patch("/:id", bookController.update);
 app.delete("/:id", bookController.delete);
 app.get("/delete-all", bookController.deleteAll);
-
 // Start server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

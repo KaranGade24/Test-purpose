@@ -29,7 +29,7 @@ exports.read = async (req, res) => {
   try {
     const books = await Book.find();
     console.log(books);
-    res.send(books);
+    res.json(books);
   } catch (err) {
     console.log(err);
     res.send(err);
@@ -43,7 +43,7 @@ exports.update = async (req, res) => {
       new: true,
     });
     console.log(doc);
-    res.send(doc);
+    res.json(doc);
   } catch (err) {
     console.log(err);
     res.send(err);
@@ -63,12 +63,12 @@ exports.delete = async (req, res) => {
 
 // Controller method to delete all books
 exports.deleteAll = async (req, res) => {
-  const books  =await Book.find();
+  const books = await Book.find();
 
-books.map(async(book)=>{
- const id=  book._id;
- const doc = await Book.findByIdAndDelete(id);
- console.log(doc);
-})
- 
-}
+  books.map(async (book) => {
+    const id = book._id;
+    const doc = await Book.findByIdAndDelete(id);
+    console.log(doc);
+    res.send(doc);
+  });
+};

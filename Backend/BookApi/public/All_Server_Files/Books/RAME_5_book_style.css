@@ -78,6 +78,12 @@ body {
   padding: 0 1rem;
 }
 
+.container-card {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
 h2 {
   color: #2c3e50;
   border-bottom: 2px solid #2c3e50;
@@ -101,6 +107,37 @@ h2 {
   height: auto;
   border-radius: 4px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.view-more {
+  width: 120px;
+  height: 50px;
+  background-color: rgb(10, 25, 223);
+  border-radius: 20px;
+  padding: 10px;
+
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+.view-more:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+.view-more button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  padding: 3px;
+  width: 80%;
+  background-color: rgb(10, 25, 223);
+  border: none;
+}
+.view-more button:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 .publishing-with {

@@ -1,9 +1,7 @@
+exports.admin = (req, res) => {
+  const api = "https://didactic-couscous-4x9wv746j6j2j4pj-8080.app.github.dev";
 
-
-exports.admin = (req,res)=>{
-const api = "https://test-purpose-yesu.onrender.com/"
-
-const html = `<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -61,10 +59,11 @@ const html = `<!DOCTYPE html>
     </style>
   </head>
   <body>
-    <h2>Upload Form</h2>
+    <center><h1>Admin Panel</h1> </center>
+    <h2>Add Book Information</h2>
     <form
       id="uploadForm"
-      action=${api}add
+      action="/add"
       method="POST"
       enctype="multipart/form-data"
     >
@@ -78,7 +77,22 @@ const html = `<!DOCTYPE html>
       <input type="text" id="genre" name="genre" required />
 
       <label for="year">Year of Publication:</label>
-      <input type="number" id="year" name="year" required />
+      <input type="number" id="year" name="year" required /> 
+
+      <label for="printPrice">Enter book print Price:</label>
+      <input type="number" id="printPrice" name="printPrice" required />
+      
+      <label for="ebookPrice">Enter book ebook Price:</label>
+      <input type="number" id="ebookPrice" name="ebookPrice" required /> 
+      
+      <label for="editor">Editor's Information:</label>
+      <input type="text" id="editor" name="editor" required />      
+      
+      <label for="editorEmail">Editor's Email:</label>
+      <input type="email" id="editorEmail" name="editorEmail" required /> 
+      
+  <label for="coEditors">Co-Editor's Information:</label>
+  <input type="text" id="coEditors" name="coEditors" required />
 
       <label for="description">Description:</label>
       <textarea
@@ -120,7 +134,7 @@ const html = `<!DOCTYPE html>
 
         try {
           const response = await fetch(
-            ${api}add, // Adjust to your API URL
+            '/add',
             {
               method: "POST",
               body: formData,
@@ -142,8 +156,7 @@ const html = `<!DOCTYPE html>
       
     </script>
   </body>
-</html>`
+</html>`;
 
-res.send(html);
-
-}
+  res.send(html);
+};

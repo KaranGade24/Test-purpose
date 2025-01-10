@@ -97,7 +97,7 @@ console.log(eBookPath);
             text-align: center;
           }
           .book-card img {
-            max-width: 200px;
+            max-width: 300px;
             height: auto;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -151,6 +151,11 @@ console.log(eBookPath);
           .footer p {
             margin: 0;
           }
+            @media (max-width:590px) {
+                .book-card img{
+                max-width:200px;
+}
+            }
         </style>
       </head>
       <body>
@@ -188,9 +193,8 @@ console.log(eBookPath);
             <hr />
            
             <h3>Editor's Information</h3>
-            <p><strong>Editor:</strong> ${bookData.editor || "Dr. Manoj A. Kumbhalkar"}<br />
-            President, Research Association of Masters of Engineering, India.<br />
-            Email: <a href="mailto:manoj.kumbhalkar@rame.org.in">manoj.kumbhalkar@rame.org.in</a></p>
+            <p><strong>Editor:</strong> ${bookData.editor || "Dr. Manoj A. Kumbhalkar"}</br>
+            Email:<a href="mailto:${bookData.editorEmail}">${bookData.editorEmail}</a></p>
 
             <h3>Co-Editors Information</h3>
             <p>${bookData.coEditors || "Dr. Radheshyam H. Gajghat, Dr. Kishor S. Rambhad"}<br />

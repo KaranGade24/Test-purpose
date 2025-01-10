@@ -5,15 +5,21 @@ exports.read5book = async (req, res) => {
   try {
     // Fetch 5 books from the database
     const bookData = await Book.find().limit(5);
-   var msg = "";
-    if(!(bookData[0])){
-       msg = "Books are not available";
-    }
-    else{
+    var msg = "",
+      viewMore = "";
+
+    if (!bookData[0]) {
+      msg = "Books are not available";
+      viewMore = "";
+    } else {
       msg = "Recent Books";
+      viewMore =
+        '<a href = "/books/1"  <div class= "view-more"><button>View More</button></div></a>';
     }
-    console.log(msg,bookData);
-    
+    console.log(viewMore);
+
+    // console.log(msg,bookData);
+
     const RAME_book_style = "RAME_book_style.css";
 
     // Generate HTML for books dynamically
@@ -21,7 +27,7 @@ exports.read5book = async (req, res) => {
     // bookData.map((book) => {
     //   console.log("../uploads" + book.files[0]?.filePath.split("/uploads")[1]);
     // });
-
+    // var count = 0;
     const booksHtml = bookData
       .map(
         (book) => `
@@ -45,7 +51,7 @@ exports.read5book = async (req, res) => {
             <p><strong>ISBN:</strong> ${book.isbn}</p>
             <p><strong>Description:</strong> ${book.description}</p>
           </div>
-        </article>`
+        </article> </a>`
       )
       .join("");
 
@@ -145,7 +151,12 @@ exports.read5book = async (req, res) => {
               <h2>${msg}</h2>
               ${booksHtml}
             </div>
+
+      
+${viewMore}
+
           </section>
+
 
           <section class="publishing-with">
             <h2>Publishing With</h2>
@@ -183,35 +194,35 @@ exports.read5book = async (req, res) => {
               <div class="author-cards">
                 <div class="author-card">
                   <h3>Aim and Scope</h3>
-                  <p>Discover the vision and mission behind our publications.</p>
+                <a href=""  <p>Discover the vision and mission behind our publications.</p></a>
                 </div>
                 <div class="author-card">
                   <h3>Editorial Board</h3>
-                  <p>Meet the experts behind our peer-review process.</p>
+                 <a href="" <p>Meet the experts behind our peer-review process.</p></a>
                 </div>
                 <div class="author-card">
                   <h3>Author's Guidelines</h3>
-                  <p>Follow the steps to prepare your manuscript for submission.</p>
+                 <a href = "" ><p>Follow the steps to prepare your manuscript for submission.</p></a>
                 </div>
                 <div class="author-card">
                   <h3>Publication Ethics</h3>
-                  <p>Learn about our ethical standards for publication.</p>
+                 <a href=""> <p>Learn about our ethical standards for publication.</p></a>
                 </div>
                 <div class="author-card">
                   <h3>Publication Policies</h3>
-                  <p>Understand the policies we follow for all publications.</p>
+                 <a href=""> <p>Understand the policies we follow for all publications.</p></a>
                 </div>
                 <div class="author-card">
                   <h3>Processing Charges</h3>
-                  <p>Details about charges associated with publishing.</p>
+                 <a href=""> <p>Details about charges associated with publishing.</p></a>
                 </div>
                 <div class="author-card">
                   <h3>Call for Paper</h3>
-                  <p>Submit your research for our upcoming publications.</p>
+                 <a href=""> <p>Submit your research for our upcoming publications.</p></a>
                 </div>
                 <div class="author-card">
                   <h3>FAQS</h3>
-                  <p>Find answers to frequently asked questions.</p>
+                 <a href=""> <p>Find answers to frequently asked questions.</p></a>
                 </div>
                 <div class="author-card">
                   <h3>View all Books</h3>
