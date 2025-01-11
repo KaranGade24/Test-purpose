@@ -4,83 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Upload Form</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        padding: 20px;
-        background-color: #f9f9f9;
-      }
-      h2 {
-        text-align: center;
-        color: #333;
-      }
-      form {
-        max-width: 500px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-      label {
-        font-weight: bold;
-        display: block;
-        margin-bottom: 5px;
-      }
-      input[type="text"],
-      input[type="number"],
-      input[type="file"],
-      textarea {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 14px;
-      }
-      button {
-        display: block;
-        width: 100%;
-        padding: 10px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        cursor: pointer;
-      }
-      button:hover {
-        background-color: #0056b3;
-      }
-      .book-list {
-        border: 1px solid black;
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        height: 400px;
-        overflow: auto;
-      }
-      .book-item {
-        margin-bottom: 30px;
-        border-bottom: 2px solid black;
-        padding-bottom: 10px;
-      }
-      .book-item:last-child {
-        border-bottom: none;
-      }
-      img {
-        max-width: 100px;
-        height: auto;
-        margin-bottom: 10px;
-      }
-      .file-link {
-        display: block;
-        margin-top: 10px;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <center><h1>Admin Panel</h1></center>
@@ -154,109 +78,12 @@
 
     <div id="bookList" class="book-list">
       <h3>Uploaded Books:</h3>
+      <div id="update-delete-btn"></div>
+
     </div>
 
-    <script>
-      var result1;
-
-      async function a() {
-        try {
-          const response = await fetch(
-            "https://test-purpose-yesu.onrender.com/bookss",
-            { method: "GET" }
-          );
-
-          if (response.ok) {
-            result1 = await response.json();
-            // Parse the JSON response
-            console.log(result1);
-            displayBooks(result1); // Function to display books on the frontend
-          } else {
-            console.error("Failed to fetch books. Status:", response.status);
-          }
-        } catch (error) {
-          console.error("Error fetching books:", error);
-        }
-      }
-
-      a();
-
-      // Function to display the books
-      function displayBooks(books) {
-        const api = "https://test-purpose-yesu.onrender.com";
-        const bookList = document.getElementById("bookList");
-        bookList.innerHTML = ""; // Clear any existing books
-        books.forEach((book) => {
-          const bookItem = document.createElement("div");
-          bookItem.classList.add("book-item");
-          bookItem.innerHTML = `
-           <p><strong>Book Cover:</strong></br></br><img src="${api}/uploads${
-            book.files[0].filePath.split("/uploads")[1]
-          }" alt="Book Cover" /></p>
-            <p><strong>Name:</strong> ${book.name}</p>
-            <p><strong>ISBN:</strong> ${book.isbn}</p>
-            <p><strong>Genre:</strong> ${book.genre}</p>
-            <p><strong>Year:</strong> ${book.year}</p>
-            <p><strong>Print Price:</strong> ${book.printPrice}</p>
-            <p><strong>eBook Price:</strong> ${book.ebookPrice}</p>
-            <p><strong>Description:</strong> ${book.description}</p>
-            <p><strong>Abstraction:</strong> ${book.Abstraction}</p>
-            <p><strong>eBook:</strong> <a href="${api}/uploads${
-            book.files[0].filePath.split("/uploads")[1]
-          }" target="_blank" class="file-link">Download eBook</a></p>
-          `;
-          // console.log(book.files[0].filePath.split("/uploads")[1]);
-          // console.log(
-          //   api + "/uploads" + book.files[1].filePath.split("/uploads")[1]
-          // );
-
-          bookList.appendChild(bookItem);
-        });
-      }
-
-      document.getElementById("uploadForm").onsubmit = async function (event) {
-        event.preventDefault(); // Prevent form from being submitted traditionally
-
-        const formData = new FormData(this); // Get form data
-
-        try {
-          const response = await fetch(
-            "https://test-purpose-yesu.onrender.com/add",
-            {
-              method: "POST",
-              body: formData,
-            }
-          );
-
-          const result = await response.json(); // Parse response as JSON
-
-          if (result.message) {
-            alert(result.message); // Show success message
-
-            // Display book details in the "Uploaded Books" section
-            //   const bookList = document.getElementById("bookList");
-            //   const bookItem = document.createElement("div");
-            //   bookItem.classList.add("book-item");
-
-            //   bookItem.innerHTML = `
-            //     <p><strong>Name:</strong> ${result.book.name}</p>
-            //     <p><strong>ISBN:</strong> ${result.book.isbn}</p>
-            //     <p><strong>Genre:</strong> ${result.book.genre}</p>
-            //     <p><strong>Year:</strong> ${result.book.year}</p>
-            //     <p><strong>Print Price:</strong> ${result.book.printPrice}</p>
-            //     <p><strong>eBook Price:</strong> ${result.book.ebookPrice}</p>
-            //     <p><strong>Description:</strong> ${result.book.description}</p>
-            //     <p><strong>Abstraction:</strong> ${result.book.Abstraction}</p>
-            //     <p><strong>Book Cover:</strong> <img src="${result.files[0].filePath}" alt="Book Cover" /></p>
-            //     <p><strong>eBook:</strong> <a href="${result.files[1].filePath}" target="_blank" class="file-link">Download eBook</a></p>
-            //   `;
-            //   bookList.appendChild(bookItem);
-          }
-        } catch (error) {
-          console.error("Error uploading files:", error);
-          alert("Failed to upload files. Please try again.");
-        }
-      };
-    </script>
+ 
+    
+    <script src="script.js"></script>
   </body>
 </html>
